@@ -1,0 +1,149 @@
+<h3>
+	
+	<div class="pull-right">
+		
+		<a type="button" class="btn btn btn-success" href="#/app/process-add">
+			<i class="fa fa-plus"></i>
+		<span class="hidden-xs">Adicionar</span></a>
+			<a type="button" class="btn btn btn-info" ng-click="alert()">
+				<i class="fa fa-edit"></i>
+			<span class="hidden-xs">Editar</span></a>
+	</div>
+	Lista de Processos
+	<small>Todos os processos criados ou vinculados ao usuário</small>
+	
+</h3>
+<div class="row sub-nav">
+	<div class="col-lg-4 pull-right">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default fa fa-th-large {{(viwer=='card')?'active':''}}" ng-click="viwer='card'"></button>
+			<button type="button" class="btn btn-default fa fa-th-list {{(viwer=='list')?'active':''}}" ng-click="viwer='list'"></button>
+		</div>
+	</div>
+</div>
+
+<div class="row" ng-if="viwer=='card'">
+	<div class="col-lg-4 col-md-6" ng-repeat="process in processList" ng-click="openDetail(process)">
+		<!-- START widget-->
+		<div class="panel widget process-card" style="border-top: 3px solid {{process.group.color}}">
+			<div class="panel-body">
+				<div class="row divider">
+					<div class="text-muted">
+						<div class="col-lg-4">						
+							<div>Cód.: <b>{{process.protocol}}</b></div>
+						</div>
+						<div class="col-lg-8">
+							<img src="{{process.user.url}}" alt="Image" class="img-responsive img-circle pull-right">
+							<span class="pull-right user-name">{{process.user.name}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="divider">
+					<h3 class="mt0">{{process.flow}}</h3>
+					<p class="text-muted">{{process.subject}}</p>
+					<span class="text-muted">{{process.status}} ({{process.percent}}% Concluído)</span>
+					<div class="progress progress-striped progress-xs ">
+						<div role="progressbar" aria-valuenow="{{parseFloat(process.percent)}}" aria-valuemin="0" aria-valuemax="70" class="progress-bar progress-bar-warning progress-{{process.percent}}"   style="background-color:{{process.group.color}};">
+							<span class="sr-only">{{process.percent}}% Complete</span>
+						</div>
+					</div>
+				</div>
+				<div class="text-muted divider">
+					Setor: {{process.curent_step}} ({{process.time}})
+				</div>				
+				<div class="text-muted">
+					Arquivos: <a href="https://docs.google.com/a/rw3tecnologia.com/document/d/1CpFpPT8PLsg2Nd1cFS9fHnZVAqGELy_HcYE2AqrOrTo/edit" target="_blank">Exoneração.doc</a> |  
+					<a href="https://docs.google.com/a/rw3tecnologia.com/document/d/1CpFpPT8PLsg2Nd1cFS9fHnZVAqGELy_HcYE2AqrOrTo/edit" target="_blank">Cópia de edital.pdf</a> | 
+					<a href="https://docs.google.com/a/rw3tecnologia.com/document/d/1CpFpPT8PLsg2Nd1cFS9fHnZVAqGELy_HcYE2AqrOrTo/edit" target="_blank">Copia de indentidade.jpg</a>
+				</div>
+			</div>
+		</div>
+		<!-- END widget-->
+	</div>
+	
+			</div>
+			
+			<div class="panel panel-default ng-scope" ng-if="viwer=='list'">
+				<div class="panel-heading">Lista de processos</div>
+				<!-- START table-responsive-->
+				<div class="table-responsive">
+					<table id="table-ext-1" class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Protocolo</th>
+								<th>Autor</th>
+								<th>Fuxo</th>
+								<th>Assunto</th>
+								<th>Situação</th>
+								<th>Fase Atual</th>
+								<th>Porcentagem</th>
+								<th>Tempo</th>
+								<th check-all="check-all">
+									<div data-toggle="tooltip" data-title="Check All" class="checkbox c-checkbox">
+										<label>
+											<input type="checkbox">
+											<span class="fa fa-check"></span>
+										</label>
+									</div>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="process in processList" ng-click="openDetail(process)">
+								<td class="text-center">{{process.protocol}}</td>
+								<td title="{{process.user.email}}"  class="text-center">
+									<div class="media">
+										<img src="{{process.user.url}}" alt="Image" class="img-responsive img-circle">
+									</div>
+									{{process.user.name}}
+								</td>
+								<td>{{process.flow}}</td>
+								<td>{{process.flow}}</td>
+								<td>Em Andamento</td>
+								<td>Setor Contratos</td>
+								<td class="text-center">
+									<div data-label="{{process.percent}}%" class="radial-bar radial-bar-{{process.percent}} radial-bar-xs"></div>
+								</td>
+								<td>2 semanas</td>
+								<td>
+									<div class="checkbox c-checkbox">
+										<label>
+											<input type="checkbox">
+											<span class="fa fa-check"></span>
+										</label>
+									</div>
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+				<!-- END table-responsive-->
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-lg-2">
+							<div class="input-group">
+								<input type="text" placeholder="Search" class="input-sm form-control">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-sm btn-default">Search</button>
+								</span>
+							</div>
+						</div>
+						<div class="col-lg-8"></div>
+						<div class="col-lg-2">
+							<div class="input-group pull-right">
+								<select class="input-sm form-control">
+									<option value="0">Bulk action</option>
+									<option value="1">Delete</option>
+									<option value="2">Clone</option>
+									<option value="3">Export</option>
+								</select>
+								<span class="input-group-btn">
+									<button class="btn btn-sm btn-default">Apply</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+						

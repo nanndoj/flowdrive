@@ -1,0 +1,30 @@
+/* ========================================================================
+   Component: custom
+ ========================================================================== */
+
+// Variables
+// ========================================================================
+
+
+
+// Message container for positioning
+.process-card{
+}
+.process-card img{
+  width: 30px;
+}
+
+
+// Phones portrait and smaller */
+@media (max-width: $mq-mobile) {
+
+    // Fit in small screen
+
+    .alerts {
+        left: 10px;
+        right: 10px;
+        width: auto;
+        margin: 0;
+    }
+
+}
