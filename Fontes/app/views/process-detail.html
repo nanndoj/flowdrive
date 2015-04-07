@@ -1,0 +1,375 @@
+<h3>	
+	Detalhe de Processo
+	<small>Informações completas sobre um processo</small>	
+</h3>
+<div>
+	<div class="col-sm-12">	
+		
+		<a type="button" class="btn btn btn-primary" ng-dialog="upload" ng-dialog-class="ngdialog-theme-default"  ng-dialog-controller="process-detail"><i class="fa fa-plus"></i><span class="hidden-xs">Arquivo</span></a>
+		<a type="button" class="btn btn btn-primary" ng-click="alert()"><i class="fa fa-edit"></i><span class="hidden-xs">Editar</span></a>
+		<a type="button" class="btn btn btn-info" ng-click="alert()"><i class="fa fa-comments"></i><span class="hidden-xs">Comentar</span></a>
+		<a type="button" class="btn btn btn-green" ng-click="alert()"><i class="fa fa-arrow-left"></i><span class="hidden-xs">Fase anterior</span></a>
+		<a type="button" class="btn btn btn-green" ng-click="alert()"><span class="hidden-xs">Próxima fase</span><i class="fa fa-arrow-right"></i></a>
+		
+	</div>
+</div>
+<div class="row process-detail">
+	
+	<div class="col-sm-8">
+		<div class="divider col-sm-12"><i class="fa fa-newspaper-o"></i> Detalhes:</div>
+		<div class="col-sm-6">
+			<div class="form-group m0">
+				<label class="col-sm-4 control-label">Protocolo:</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{process.protocol}}</p>
+				</div>
+			</div>				
+			<div class="form-group m0">
+				<label class="col-sm-4 control-label">Fluxo:</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{process.flow}}</p>
+				</div>
+			</div>			
+			<div class="form-group m0">
+				<label class="col-sm-4 control-label">Setor Atual:</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{process.curent_step}}</p>
+				</div>
+			</div>
+		</div>	
+		<div class="col-sm-6">
+			<div class="form-group m0">
+				<label class="col-sm-4 control-label">Status:</label>
+				<div class="col-sm-8">
+					<p class="form-control-static">{{process.status}}
+					</p>
+				</div>
+			</div>
+			
+			
+			
+			
+		</div>	
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="divider col-sm-12"><i class="fa fa-envelope-o"></i> Assunto:</div>
+				<div class="col-sm-12"><div class="col-sm-12">{{process.subject}}</div></div>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="divider col-sm-12"><i class="fa fa-navicon"></i> Mais Informações:</div>
+				
+				<tabset justified="true" class="process-detail-more-info p0">
+					<tab>
+						<tab-heading>
+						<em class=""></em>Histórico</tab-heading>
+						<div class="list-group mb0">
+							
+							<a href="#" class="list-group-item bt0">
+								<span class="label label-purple pull-right">10/12/2015</span>
+							<em class="fa fa-fw fa-calendar mr"></em>Processo Criado</a>
+							
+							
+							<a href="#" class="list-group-item bt0">
+								<span class="label label-purple pull-right">12/12/2015</span>
+							<em class="fa fa-fw fa-calendar mr"></em>Processo Transferido para o setor de compras</a>
+							
+						</div>                                                            
+					</tab>                                                                  
+					<tab>                                                                   
+						<tab-heading>                                                        
+						<em class=""></em>Comentários</tab-heading>   
+						<div>
+							
+							<scrollable height="230" class="list-group" style="overflow: hidden; width: auto; height: 230px;">
+								<!-- START list group item-->
+								<a href="#" class="list-group-item">
+									<div class="media-box">
+										<div class="pull-left">
+											<img src="https://lh3.googleusercontent.com/-RBKy0gJ8gNs/AAAAAAAAAAI/AAAAAAAAAuw/tAtBvwZWxfE/s120-c/photo.jpg" alt="Image" class="media-box-object img-circle thumb32">
+										</div>
+										<div class="media-box-body clearfix">
+											<small class="pull-right">28/03/2015</small>
+											<strong class="media-box-heading text-primary">
+											Daniel Piola</strong>
+											<p class="mb-sm">
+												<small>Este processo tem prioridade por que o governador quer logo</small>
+											</p>                                                           
+										</div>                                                            
+									</div>                                                               
+								</a>                                                                    
+								<!-- END list group item-->                                             
+								
+							</scrollable>                                                              
+						</div> 
+						
+					</tab>   
+					
+					<tab>                                                                   
+						<tab-heading>                                                        
+						<em class=""></em>Linha do Tempo</tab-heading>   
+						<div>
+							<ul ng-class="timelineAlt ? 'timeline-alt' : 'timeline'" ng-init="timelineAlt=false">
+								<li data-datetime="Now" class="timeline-separator"></li>
+								<!-- START timeline item-->
+								<li>
+									<div class="timeline-badge primary">
+										<em class="fa fa-users"></em>
+									</div>
+									<div class="timeline-panel">
+										<div ng-class="timelineAlt ? 'right' : 'left'" class="popover">
+											<h4 class="popover-title">Client Meeting</h4>
+											<div class="arrow"></div>
+											<div class="popover-content">
+												<p>Av 123 St - Floor 2
+													<br/>
+													<small>Pellentesque ut diam velit, eget porttitor risus. Nullam posuere euismod volutpat.</small>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- END timeline item-->
+								<!-- START timeline item-->
+								<li class="timeline-inverted">
+									<div class="timeline-badge warning">
+										<em class="fa fa-phone"></em>
+									</div>
+									<div class="timeline-panel">
+										<div class="popover right">
+											<h4 class="popover-title">Call</h4>
+											<div class="arrow"></div>
+											<div class="popover-content">
+												<p>Michael <a href="tel:+011654524578">(+011) 6545 24578 ext. 132</a>
+													<br/>
+													<small>Pellentesque ut diam velit, eget porttitor risus. Nullam posuere euismod volutpat.</small>
+												</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- END timeline item-->
+								<!-- START timeline separator-->
+								<li data-datetime="Yesterday" class="timeline-separator"></li>
+								<!-- END timeline separator-->
+								<!-- START timeline item-->
+								<li>
+									<div class="timeline-badge danger">
+										<em class="fa fa-video-camera"></em>
+									</div>
+									<div class="timeline-panel">
+										<div ng-class="timelineAlt ? 'right' : 'left'" class="popover">
+											<h4 class="popover-title">Conference</h4>
+											<div class="arrow"></div>
+											<div class="popover-content">
+												<p>Join development group</p>
+												<small>
+													<a href="skype:echo123?call">
+													<em class="fa fa-phone"></em>Call the Skype Echo</a>
+												</small>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- END timeline item-->
+								<!-- START timeline item-->
+								<li class="timeline-inverted">
+									<div class="timeline-panel">
+										<div class="popover right">
+											<h4 class="popover-title">Appointment</h4>
+											<div class="arrow"></div>
+											<div class="popover-content">
+												<p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam.</p>
+												<div class="btn-group">
+													<a href="#" data-toggle="dropdown" data-play="fadeIn" class="dropdown-toggle">
+														<em class="fa fa-paperclip"></em>
+													</a>
+													<ul class="dropdown-menu text-left">
+														<li>
+															<a href="#">
+															<em class="fa fa-download"></em>Download</a>
+														</li>
+														<li>
+															<a href="#">
+															<em class="fa fa-share"></em>Send to</a>
+														</li>
+														<li class="divider"></li>
+														<li>
+															<a href="#">
+															<em class="fa fa-times"></em>Delete</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- END timeline item-->
+								<!-- START timeline item-->
+								<li>
+									<div class="timeline-badge info">
+										<em class="fa fa-plane"></em>
+									</div>
+									<div class="timeline-panel">
+										<div ng-class="timelineAlt ? 'right' : 'left'" class="popover">
+											<h4 class="popover-title">Fly</h4>
+											<div class="arrow"></div>
+											<div class="popover-content">
+												<p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- END timeline item-->
+								<!-- START timeline item-->
+								<li>
+									<div class="timeline-panel">
+										<div ng-class="timelineAlt ? 'right' : 'left'" class="popover">
+											<h4 class="popover-title">Appointment</h4>
+											<div class="arrow"></div>
+											<div class="popover-content">
+												<p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- END timeline item-->
+								<!-- START timeline separator-->
+								<li data-datetime="2014-05-21" class="timeline-separator"></li>
+								<!-- END timeline separator-->
+								<!-- START timeline item-->
+								<li class="timeline-inverted">
+									<div class="timeline-badge success">
+										<em class="fa fa-music"></em>
+									</div>
+									<div class="timeline-panel">
+										<div class="popover right">
+											<h4 class="popover-title">Relax</h4>
+											<div class="arrow"></div>
+											<div class="popover-content">
+												<p>Listen some music</p>
+											</div>
+										</div>
+									</div>
+								</li>
+								<!-- END timeline item-->
+								<!-- START timeline item-->
+								<li class="timeline-end">
+									<a href="#" class="timeline-badge">
+										<em class="fa fa-plus"></em>
+									</a>
+								</li>
+								<!-- END timeline item-->
+							</ul>
+							<!-- END timeline-->                                                            
+						</div> 
+						
+					</tab>
+				</tabset>                                                                  
+			</div>
+		</div>
+		
+		
+	</div>	
+	<div class="col-sm-4">
+		<div class="process-detail-users">
+			<div class="divider"><i class="fa fa-group"></i> Usuários:</div>
+			<ul class="list-unstyled">
+				<li>
+					<img src="https://lh3.googleusercontent.com/-RBKy0gJ8gNs/AAAAAAAAAAI/AAAAAAAAAuw/tAtBvwZWxfE/s120-c/photo.jpg" alt="Image" class="img-responsive img-circle">
+					<div class="user-name ng-binding">Daniel Piola</div>
+					</li><li>
+					<img src="https://lh3.googleusercontent.com/-9rtQFmpIujE/AAAAAAAAAAI/AAAAAAAAACI/BYPVXdBlnf8/s120-c/photo.jpg" alt="Image" class="img-responsive img-circle">
+					<div class="user-name ng-binding">Fernando Santos</div>
+					</li><li>
+					<img src="https://lh3.googleusercontent.com/-RBKy0gJ8gNs/AAAAAAAAAAI/AAAAAAAAAuw/tAtBvwZWxfE/s120-c/photo.jpg" alt="Image" class="img-responsive img-circle">
+					<div class="user-name ng-binding">Daniel Piola</div>
+				</li>
+			</li>
+			
+		</ul>	
+	</div>
+	
+	<div class="process-detail-files">
+		<div class="divider"><i class="fa fa-folder-open"></i> Arquivos:</div>
+		<ul class="list-unstyled">
+			<li><a><i class="fa fa-file-pdf-o "></i> Cópia do edital.pdf</a></li>
+			<li><a><i class="fa fa-file-photo-o "></i> Carteira de habilitação.jpg</a></li>
+			<li><a><i class="fa fa-file-pdf-o "></i> Cópia do Documento.pdf</a></li>
+		</ul>		
+	</div>		
+	
+	<div class="process-detail-files">
+		<div class="divider"><i class="fa fa-tasks"></i> Fases do processo:</div>
+		<ul class="list-unstyled">
+			<li><span class="circle circle-success circle-lg text-left"></span> Setor de RH</li>
+			<li><span class="circle circle-primary circle-lg text-left"></span> Setor de Contratos</li>
+			<li><span class="circle circle-default circle-lg text-left"></span> Setor Finenceiro</li>
+		</ul>		
+	</div>
+</div>
+</div>
+<script type="text/ng-template" id="upload">
+	<div >
+<h3 class="mt0">Adicionar Arquivo</h3>
+
+<tabset justified="true" class="process-detail-more-info p0">
+	<tab>
+		<tab-heading>
+		<em class=""></em>Novo Arquivo</tab-heading>
+		<div class="content-wrapper ng-scope ng-fadeInUp"> 
+			<div>Selecione o tipo de documento</div>
+			<a type="button" class="btn btn btn-success" ng-click="createNewFile('planilha')" ><i class="fa fa-table"></i><span class="hidden-xs">Planilha</span></a>
+			<a type="button" class="btn btn btn-primary" ng-click="createNewFile('documento')" ><i class="fa fa-file-o"></i><span class="hidden-xs">Documento</span></a>
+			<a type="button" class="btn btn btn-warning" ng-click="createNewFile('apresentacao')" ><i class="fa fa-columns"></i><span class="hidden-xs">Apresentação</span></a>
+			<a type="button" class="btn btn btn-danger" ng-click="createNewFile('desenho')" ><i class="fa fa-file-image-o"></i><span class="hidden-xs">Desenho</span></a>
+		</div> 
+		
+	</tab> 					
+	<tab>
+		<tab-heading>
+		<em class=""></em>Upload</tab-heading>
+		<!--<div data-ng-include="'app/views/form-upload.html'">aa </div>-->   
+		TODO: Fazer upload para o drive	
+		
+	</tab> 
+	<tab>
+		<tab-heading>
+		<em class=""></em>Meu Drive</tab-heading>
+		<div>   
+			TODO: Listar do Drive
+		</div>                                                        
+	</tab> 
+	
+	<div class="upload-footer">
+		<div class="pull-right">
+			
+			<a type="button" class="btn btn btn-success" ng-click="closeThisDialog(0)">
+				<i class="fa fa-plus"></i>
+			<span class="hidden-xs">Concluir</span></a>
+			
+		</div>
+	</div>
+	
+</tabset> 
+
+
+</div>
+
+
+<div id="new-file" ng-if="newFile">
+	<h3 class="ng-scope">	
+		<div class="pull-right">		
+			<a type="button" class="btn btn btn-success" ng-click="saveNewFile()"><i class="fa fa-check"></i><span class="hidden-xs">Concluir</span></a>
+		</div>
+		Novo Arquivo
+		<small>Este arquivo será anexado ao seu processo</small>	
+	</h3>
+	<iframe ng-src="{{trustSrc(newFileURL)}}">
+	</div>
+</script>
+
+
