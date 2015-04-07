@@ -22,7 +22,7 @@ public class DAOTest {
 
   // maximum eventual consistency
   private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
-      new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
+                                                  new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
 
   @Before
   public void setUp() {
@@ -35,7 +35,7 @@ public class DAOTest {
   }
 
   @Test
-  public void testInsertEntityIntoDatastoreWithChildren() {
+  public void shouldInsertEntityIntoDatastoreWithChildren() {
     DAO dao = new ProcessUnitDAO();
 
     ProcessUnit entity = new ProcessUnit();
@@ -65,7 +65,7 @@ public class DAOTest {
   }
 
   @Test
-  public void testDeleteEntityFromDatastore() {
+  public void shouldDeleteEntityFromDatastore() {
     DAO dao = new ProcessUnitDAO();
 
     ProcessUnit entity = new ProcessUnit();
@@ -102,7 +102,7 @@ public class DAOTest {
   }
 
   @Test
-  public void testGetEntityFromDatastore() {
+  public void shouldGetEntityFromDatastore() {
     DAO dao = new ProcessUnitDAO();
 
     ProcessUnit entity = new ProcessUnit();
@@ -140,7 +140,7 @@ public class DAOTest {
   }
 
   @Test
-  public void testUpdateEntityFromDatastore() {
+  public void shouldUpdateEntityFromDatastore() {
     DAO dao = new ProcessUnitDAO();
 
     ProcessUnit entity = new ProcessUnit();

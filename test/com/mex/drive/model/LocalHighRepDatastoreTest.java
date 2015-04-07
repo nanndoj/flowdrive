@@ -20,7 +20,7 @@ public class LocalHighRepDatastoreTest {
 
   // maximum eventual consistency
   private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
-                                                  new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
+      new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
 
   @Before
   public void setUp() {
@@ -33,7 +33,7 @@ public class LocalHighRepDatastoreTest {
   }
 
   @Test
-  public void testEventuallyConsistentGlobalQueryResult() {
+  public void shouldVerifyConsistentGlobalQueryResult() {
     DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
     Key ancestor = KeyFactory.createKey("foo", 3);
     ds.put(new Entity("yam", ancestor));

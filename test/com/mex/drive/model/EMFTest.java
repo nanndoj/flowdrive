@@ -17,7 +17,7 @@ public class EMFTest {
 
   // maximum eventual consistency
   private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
-                                                  new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
+      new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
 
   @Before
   public void setUp() {
@@ -30,7 +30,7 @@ public class EMFTest {
   }
 
   @Test
-  public void testSameEntityManagerFactoryInstance() {
+  public void shouldGetTheSameEntityManagerFactoryInstance() {
     EntityManagerFactory em = EMF.get();
     EntityManagerFactory em2 = EMF.get();
 
@@ -39,7 +39,7 @@ public class EMFTest {
   }
 
   @Test
-  public void testShouldPersistBasicEntity() {
+  public void shouldPersistBasicEntity() {
     EntityManager em = EMF.get().createEntityManager();
     // Create a new base entity
     ProcessUnit unit = new ProcessUnit();
