@@ -15,7 +15,7 @@
   <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
   <init-param>
    <param-name>services</param-name>
-   <param-value>com.mex.drive.view.endpoint.Greetings</param-value>
+   <param-value>com.mex.drive.view.endpoint.RequestREST</param-value>
   </init-param>
  </servlet>
  <servlet-mapping>

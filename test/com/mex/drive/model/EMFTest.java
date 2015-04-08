@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
-import com.mex.drive.model.entity.ProcessUnit;
+import com.mex.drive.model.entity.Request;
 
 public class EMFTest {
 
@@ -42,17 +42,17 @@ public class EMFTest {
   public void shouldPersistBasicEntity() {
     EntityManager em = EMF.get().createEntityManager();
     // Create a new base entity
-    ProcessUnit unit = new ProcessUnit();
-    unit.setNumber(12387771L);
-    unit.setSubject("Test Process Unit");
+    Request unit = new Request();
+    unit.setProtocolNumber("12387771L");
+    unit.setTitle("Test Process Unit");
     // Persist the basic entity
     em.persist(unit);
 
     // Check if the entity was saved into the datastore
-    ProcessUnit merge = em.merge(unit);
-    ProcessUnit foundEntity = em.find(ProcessUnit.class, merge.getId());
+    Request merge = em.merge(unit);
+    Request foundEntity = em.find(Request.class, merge.getId());
 
-    assertEquals(unit.getSubject(), foundEntity.getSubject());
+    assertEquals(unit.getTitle(), foundEntity.getTitle());
 
   }
 }

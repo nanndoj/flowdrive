@@ -18,7 +18,7 @@ public interface ObjectHandler<T> {
    *
    * @return
    */
-  BasicEntity insert(T entity) throws Exception;
+  T insert(T entity) throws Exception;
 
   /**
    * Updates the given entity record on the datastore
@@ -46,5 +46,5 @@ public interface ObjectHandler<T> {
    *
    * @return
    */
-  <K extends T> K get(Class<K> clazz, Key id);
+  <K extends BasicEntity> K get(Class<K> clazz, Key id);
 }

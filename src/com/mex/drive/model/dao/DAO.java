@@ -101,4 +101,14 @@ public abstract class DAO implements ObjectHandler<BasicEntity> {
     }
   }
 
+  public static DAO getInstance(Class<? extends BasicEntity> clazz) {
+    try {
+      Class<?> DAOClass = Class.forName("com.mex.drive.model.dao." + clazz.getSimpleName() + "DAO");
+      return (DAO) DAOClass.newInstance();
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+      // TODO: GetStackTrace
+      return null;
+    }
+  }
+
 }
