@@ -24,6 +24,21 @@
     "maxAge" : 0
   },
   "methods" : {
+    "request.list" : {
+      "path" : "list",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.mex.drive.view.endpoint.RequestREST.getAll",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "request.get" : {
       "path" : "get",
       "httpMethod" : "GET",
@@ -56,21 +71,6 @@
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "request.list" : {
-      "path" : "list",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.mex.drive.view.endpoint.RequestREST.getAll",
-      "request" : {
-        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -223,6 +223,11 @@
       }
     },
     "methods" : {
+      "com.mex.drive.view.endpoint.RequestREST.getAll" : {
+        "response" : {
+          "$ref" : "RequestCollection"
+        }
+      },
       "com.mex.drive.view.endpoint.RequestREST.get" : {
         "response" : {
           "$ref" : "Request"
@@ -234,11 +239,6 @@
         },
         "response" : {
           "$ref" : "Request"
-        }
-      },
-      "com.mex.drive.view.endpoint.RequestREST.getAll" : {
-        "response" : {
-          "$ref" : "RequestCollection"
         }
       }
     }
