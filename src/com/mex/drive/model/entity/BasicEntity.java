@@ -15,11 +15,11 @@ public class BasicEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   protected Key id;
 
-  public Key getId() {
+  public Key getKey() {
     return this.id;
   }
 
-  public void setId(Key id) {
+  public void setKey(Key id) {
     this.id = id;
   }
 

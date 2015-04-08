@@ -50,7 +50,7 @@ public class EMFTest {
 
     // Check if the entity was saved into the datastore
     Request merge = em.merge(unit);
-    Request foundEntity = em.find(Request.class, merge.getId());
+    Request foundEntity = em.find(Request.class, merge.getKey());
 
     assertEquals(unit.getTitle(), foundEntity.getTitle());
 

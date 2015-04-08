@@ -63,7 +63,7 @@ public abstract class DAO implements ObjectHandler<BasicEntity> {
     tx.begin();
     try {
       // Find the entity
-      BasicEntity found = em.find(entity.getClass(), entity.getId());
+      BasicEntity found = em.find(entity.getClass(), entity.getKey());
       em.remove(found);
       // Commit the transaction
       tx.commit();

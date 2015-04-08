@@ -1,4 +1,4 @@
-package com.mex.drive.model.dao;
+package com.mex.drive.business;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -18,11 +18,11 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import com.mex.drive.model.entity.History;
 import com.mex.drive.model.entity.Request;
 
-public class DAOTest {
+public class BusinessObjectTest {
 
   // maximum eventual consistency
   private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
-      new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
+                                                  new LocalDatastoreServiceTestConfig().setDefaultHighRepJobPolicyUnappliedJobPercentage(100));
 
   @Before
   public void setUp() {
@@ -35,8 +35,9 @@ public class DAOTest {
   }
 
   @Test
-  public void shouldInsertEntityIntoDatastoreWithChildren() throws Exception {
-    DAO dao = DAO.getInstance(Request.class);
+  public void shouldInsertEntityWithChildren() throws Exception {
+    BusinessObject bo = new BusinessObject() {
+    };
 
     Request entity = new Request();
     entity.setProtocolNumber("1234567");
@@ -51,7 +52,7 @@ public class DAOTest {
     entity.setHistory(list);
 
     assertNull(entity.getKey());
-    dao.insert(entity);
+    bo.insert(entity);
     assertNotNull(entity.getKey());
 
     // Check if the children was inserted
@@ -61,8 +62,9 @@ public class DAOTest {
   }
 
   @Test
-  public void shouldDeleteEntityFromDatastore() throws Exception {
-    DAO dao = DAO.getInstance(Request.class);
+  public void shouldDeleteEntity() throws Exception {
+    BusinessObject bo = new BusinessObject() {
+    };
 
     Request entity = new Request();
     entity.setProtocolNumber("1234567");
@@ -77,25 +79,26 @@ public class DAOTest {
     entity.setHistory(list);
 
     // Insert a fake entity
-    dao.insert(entity);
+    bo.insert(entity);
 
     // look for the object to remove
-    Request found = dao.get(Request.class, entity.getKey());
+    Request found = bo.get(Request.class, entity.getKey());
     assertNotNull(found);
     assertEquals(found.getKey(), entity.getKey());
 
     // Remove the object
-    dao.delete(found);
+    bo.delete(found);
 
     // look for the object to remove
-    Request deleted = dao.get(Request.class, entity.getKey());
+    Request deleted = bo.get(Request.class, entity.getKey());
     assertNull(deleted);
 
   }
 
   @Test
-  public void shouldGetEntityFromDatastore() throws Exception {
-    DAO dao = DAO.getInstance(Request.class);
+  public void shouldGetEntity() throws Exception {
+    BusinessObject bo = new BusinessObject() {
+    };
 
     Request entity = new Request();
     entity.setProtocolNumber("1234567");
@@ -113,23 +116,24 @@ public class DAOTest {
     assertNull(history.getKey());
 
     // Insert a fake entity
-    dao.insert(entity);
+    bo.insert(entity);
 
     // look for the object to remove
-    Request found = dao.get(Request.class, entity.getKey());
+    Request found = bo.get(Request.class, entity.getKey());
     assertNotNull(found);
     assertEquals(found.getKey(), entity.getKey());
 
     // look for the object to remove
-    History children = dao.get(History.class, history.getKey());
+    History children = bo.get(History.class, history.getKey());
     assertNotNull(children);
     assertEquals(children.getText(), history.getText());
 
   }
 
   @Test
-  public void shouldUpdateEntityFromDatastore() throws Exception {
-    DAO dao = DAO.getInstance(Request.class);
+  public void shouldUpdateEntity() throws Exception {
+    BusinessObject bo = new BusinessObject() {
+    };
 
     Request entity = new Request();
     entity.setProtocolNumber("1234567");
@@ -147,17 +151,17 @@ public class DAOTest {
     assertNull(history.getKey());
 
     // Insert a fake entity
-    dao.insert(entity);
+    bo.insert(entity);
 
     // Create a new entity to replace the other one
     Request newUnit = new Request();
     newUnit.setKey(entity.getKey()); // They must have the same ID
     newUnit.setTitle("Text changed");
 
-    dao.update(newUnit);
+    bo.update(newUnit);
 
     // Get the new entity
-    Request found = dao.get(Request.class, newUnit.getKey());
+    Request found = bo.get(Request.class, newUnit.getKey());
     assertNotNull(found);
     assertEquals("Text changed", found.getTitle());
     assertNotNull(found.getHistory());
