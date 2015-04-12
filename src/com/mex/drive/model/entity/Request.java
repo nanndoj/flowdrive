@@ -18,12 +18,17 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Request extends BasicEntity {
-  protected String   protocolNumber;
-  protected String   title;
-  protected String   description;
-  protected User     owner;
-  protected FlowStep currentStep;
-  protected State    currentState;
+  protected String        protocolNumber;
+  protected String        title;
+  protected String        description;
+  protected User          owner;
+  protected FlowStep      currentStep;
+  protected State         currentState;
+  protected float         progressCompleted;
+  protected long          elapsedTime;
+
+  @OneToMany(cascade = CascadeType.PERSIST)
+  protected List<History> history;
 
   public String getProcessNumber() {
     return this.protocolNumber;
@@ -96,11 +101,4 @@ public class Request extends BasicEntity {
   public void setHistory(List<History> history) {
     this.history = history;
   }
-
-  protected float         progressCompleted;
-  protected long          elapsedTime;
-
-  @OneToMany(cascade = CascadeType.PERSIST)
-  protected List<History> history;
-
 }

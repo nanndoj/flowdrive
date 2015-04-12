@@ -83,6 +83,12 @@
         "id" : "Request",
         "type" : "object",
         "properties" : {
+          "key" : {
+            "$ref" : "Key"
+          },
+          "id" : {
+            "type" : "string"
+          },
           "protocolNumber" : {
             "type" : "string"
           },
@@ -117,27 +123,6 @@
           },
           "processNumber" : {
             "type" : "string"
-          },
-          "key" : {
-            "$ref" : "Key"
-          }
-        }
-      },
-      "User" : {
-        "id" : "User",
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "profileImageURL" : {
-            "type" : "string"
-          },
-          "key" : {
-            "$ref" : "Key"
           }
         }
       },
@@ -169,15 +154,84 @@
           }
         }
       },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "$ref" : "Key"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "profileImageURL" : {
+            "type" : "string"
+          }
+        }
+      },
       "FlowStep" : {
         "id" : "FlowStep",
         "type" : "object",
         "properties" : {
+          "key" : {
+            "$ref" : "Key"
+          },
+          "id" : {
+            "type" : "string"
+          },
           "name" : {
             "type" : "string"
           },
+          "flow" : {
+            "$ref" : "WorkFlow"
+          },
+          "group" : {
+            "$ref" : "FlowGroup"
+          }
+        }
+      },
+      "WorkFlow" : {
+        "id" : "WorkFlow",
+        "type" : "object",
+        "properties" : {
           "key" : {
             "$ref" : "Key"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "steps" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "FlowStep"
+            }
+          }
+        }
+      },
+      "FlowGroup" : {
+        "id" : "FlowGroup",
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "$ref" : "Key"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "color" : {
+            "type" : "string"
           }
         }
       },
@@ -185,11 +239,14 @@
         "id" : "State",
         "type" : "object",
         "properties" : {
-          "stateName" : {
-            "type" : "string"
-          },
           "key" : {
             "$ref" : "Key"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "stateName" : {
+            "type" : "string"
           }
         }
       },
@@ -197,15 +254,18 @@
         "id" : "History",
         "type" : "object",
         "properties" : {
+          "key" : {
+            "$ref" : "Key"
+          },
+          "id" : {
+            "type" : "string"
+          },
           "date" : {
             "type" : "string",
             "format" : "date-time"
           },
           "text" : {
             "type" : "string"
-          },
-          "key" : {
-            "$ref" : "Key"
           }
         }
       },

@@ -9,9 +9,26 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class FlowStep extends BasicEntity {
-  private String    name;
+  private String   name;
   @OneToMany(cascade = CascadeType.PERSIST)
-  private WorkFlow  flow;
+  private WorkFlow flow;
+
+  public WorkFlow getFlow() {
+    return this.flow;
+  }
+
+  public void setFlow(WorkFlow flow) {
+    this.flow = flow;
+  }
+
+  public FlowGroup getGroup() {
+    return this.group;
+  }
+
+  public void setGroup(FlowGroup group) {
+    this.group = group;
+  }
+
   private FlowGroup group;
 
   public String getName() {
