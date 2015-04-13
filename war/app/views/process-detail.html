@@ -4,13 +4,16 @@
 </h3>
 <div>
 	<div class="col-sm-12">	
-		
-		<a type="button" class="btn btn btn-primary" ng-dialog="upload" ng-dialog-class="ngdialog-theme-default"  ng-dialog-controller="process-detail"><i class="fa fa-plus"></i><span class="hidden-xs">Arquivo</span></a>
-		<a type="button" class="btn btn btn-primary" ng-click="alert()"><i class="fa fa-edit"></i><span class="hidden-xs">Editar</span></a>
-		<a type="button" class="btn btn btn-info" ng-click="alert()"><i class="fa fa-comments"></i><span class="hidden-xs">Comentar</span></a>
-		<a type="button" class="btn btn btn-green" ng-click="alert()"><i class="fa fa-arrow-left"></i><span class="hidden-xs">Fase anterior</span></a>
-		<a type="button" class="btn btn btn-green" ng-click="alert()"><span class="hidden-xs">Próxima fase</span><i class="fa fa-arrow-right"></i></a>
-		
+		<div ng-show="!edit">
+			<a type="button" class="btn btn btn-primary" ng-dialog="upload" ng-dialog-class="ngdialog-theme-default"  ng-dialog-controller="file-add"><i class="fa fa-plus"></i><span class="hidden-xs">Arquivo</span></a>
+			<a type="button" class="btn btn btn-primary" ng-click="edit=true"><i class="fa fa-edit"></i><span class="hidden-xs">Editar</span></a>
+			<a type="button" class="btn btn btn-info" ng-click="alert()"><i class="fa fa-comments"></i><span class="hidden-xs">Comentar</span></a>
+			<a type="button" class="btn btn btn-green" ng-click="alert()"><i class="fa fa-arrow-left"></i><span class="hidden-xs">Fase anterior</span></a>
+			<a type="button" class="btn btn btn-green" ng-click="alert()"><span class="hidden-xs">Próxima fase</span><i class="fa fa-arrow-right"></i></a>
+		</div>
+		<div ng-show="edit">
+			<a type="button" class="btn btn btn-primary" ng-click="edit=false"><i class="fa fa-check"></i><span class="hidden-xs">Salvar</span></a>
+		</div>
 	</div>
 </div>
 <div class="row process-detail">
@@ -53,7 +56,9 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="divider col-sm-12"><i class="fa fa-envelope-o"></i> Assunto:</div>
-				<div class="col-sm-12"><div class="col-sm-12">{{process.subject}}</div></div>
+				<div class="col-sm-12"><div class="col-sm-12"><p ng-if="!edit">{{process.subject}}</p>
+				<textarea class="form-control ng-pristine ng-valid ng-touched" rows="5" id="comment" ng-model="process.subject" ng-if="edit"></textarea>	
+				</div></div>
 			</div>
 		</div>
 		
@@ -313,63 +318,7 @@
 </div>
 </div>
 <script type="text/ng-template" id="upload">
-	<div >
-<h3 class="mt0">Adicionar Arquivo</h3>
-
-<tabset justified="true" class="process-detail-more-info p0">
-	<tab>
-		<tab-heading>
-		<em class=""></em>Novo Arquivo</tab-heading>
-		<div class="content-wrapper ng-scope ng-fadeInUp"> 
-			<div>Selecione o tipo de documento</div>
-			<a type="button" class="btn btn btn-success" ng-click="createNewFile('planilha')" ><i class="fa fa-table"></i><span class="hidden-xs">Planilha</span></a>
-			<a type="button" class="btn btn btn-primary" ng-click="createNewFile('documento')" ><i class="fa fa-file-o"></i><span class="hidden-xs">Documento</span></a>
-			<a type="button" class="btn btn btn-warning" ng-click="createNewFile('apresentacao')" ><i class="fa fa-columns"></i><span class="hidden-xs">Apresentação</span></a>
-			<a type="button" class="btn btn btn-danger" ng-click="createNewFile('desenho')" ><i class="fa fa-file-image-o"></i><span class="hidden-xs">Desenho</span></a>
-		</div> 
-		
-	</tab> 					
-	<tab>
-		<tab-heading>
-		<em class=""></em>Upload</tab-heading>
-		<!--<div data-ng-include="'app/views/form-upload.html'">aa </div>-->   
-		TODO: Fazer upload para o drive	
-		
-	</tab> 
-	<tab>
-		<tab-heading>
-		<em class=""></em>Meu Drive</tab-heading>
-		<div>   
-			TODO: Listar do Drive
-		</div>                                                        
-	</tab> 
-	
-	<div class="upload-footer">
-		<div class="pull-right">
-			
-			<a type="button" class="btn btn btn-success" ng-click="closeThisDialog(0)">
-				<i class="fa fa-plus"></i>
-			<span class="hidden-xs">Concluir</span></a>
-			
-		</div>
-	</div>
-	
-</tabset> 
-
-
-</div>
-
-
-<div id="new-file" ng-if="newFile">
-	<h3 class="ng-scope">	
-		<div class="pull-right">		
-			<a type="button" class="btn btn btn-success" ng-click="saveNewFile()"><i class="fa fa-check"></i><span class="hidden-xs">Concluir</span></a>
-		</div>
-		Novo Arquivo
-		<small>Este arquivo será anexado ao seu processo</small>	
-	</h3>
-	<iframe ng-src="{{trustSrc(newFileURL)}}">
-	</div>
+	<div data-ng-include="'app/views/includes/file-add.html'"></div>
 </script>
 
 
