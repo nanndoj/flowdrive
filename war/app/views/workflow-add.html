@@ -1,6 +1,11 @@
 <h3>Fluxo de Trabalho
+	
+	<div class="pull-right">
+		<a type="button" class="btn btn btn-primary" ng-click="add()"><i class="fa fa-check"></i><span class="hidden-xs">Salvar</span></a>
+	</div>
 	<small>Cadastro de fluxo de trabalho na qual será sumetido os processos</small>
 </h3>
+
 <div class="container-fluid">
 	
 	<div class="panel panel-default ng-scope">
@@ -11,21 +16,45 @@
 					<div class="">
 						<div class="">
 							<label>Fluxo</label>
-							<input type="email" placeholder="Enter email" class="form-control" ng-model="flow.name">
+							<input type="email" placeholder="Nome do fluxo de trabalho" class="form-control" ng-model="flow.name">
 						</div>
 					</div>
 				</fieldset>
 			</form>
 		</div>
 	</div>
-	<button ng-click="openStep()" class="btn btn-info">Adicionar Etapa</button>
-	<ul html-sortable="sortableOptions" html-sortable-callback="sortableCallback" ng-model="flow.steps" class="list-group">
-		<li ng-repeat="step in flow.steps" class="list-group-item" ng-click="openStep(step)">
-		<em class="fa fa-reorder fa-fw text-muted mr-lg"></em>{{step.title}}</li>
-	</ul>
+	<div class="row">
+		<div class="col-md-6">
+			
+			<div class="panel panel-default ng-scope">	
+				<div class="panel-heading">Etapas</div>
+				<ul html-sortable="sortableOptions" html-sortable-callback="sortableCallback" ng-model="flow.steps" class="list-group">
+					<li ng-repeat="step in flow.steps" class="list-group-item" ng-click="openStep(step,$index)">
+					<em class="fa fa-reorder fa-fw text-muted mr-lg"></em>{{step.title}}</li>
+				</ul>
+				<div class="panel-footer"><a type="button" class="btn btn btn-primary" ng-click="openStep(0)"><i class="fa fa-reorder"></i><span class="hidden-xs">Adicionar Etapa</span></a></div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			
+			
+			<div class="panel panel-default ng-scope">
+				<div class="panel-heading">Status</div>
+				<ul html-sortable="sortableOptions" html-sortable-callback="sortableCallback" ng-model="flow.states" class="list-group">
+					<li ng-repeat="state in flow.states" class="list-group-item">
+					<em class="fa fa-flag-o fa-fw text-muted mr-lg"></em>{{state.name}} <i class="fa fa-close pull-right" ng-click="removeState($index)"></i></li>					
+				</ul>
+				<div class="panel-footer"><div class="input-group">
+					<input type="text" class="form-control" ng-model="newState">
+					<span class="input-group-btn">
+						<a type="button" ng-disabled="!newState" class="btn btn btn-primary" ng-click="addState(newState)"><i class="fa fa-flag-o"></i><span class="hidden-xs">Adicionar Status</span></a>
+					</span>
+				</div></div>
+			</div>
+		</div>
+	</div>
 	
-	
-</div>	
+</div>
 
 <script type="text/ng-template" id="step-add">
 	<div class="panel">
@@ -42,7 +71,13 @@
 					<label>Descrição</label>
 					<textarea class="form-control" rows="5" id="comment" ng-model="curretStep.description"></textarea>
 				</div>
-				
+				<div class="form-group">
+					<label>Status aplicado a etapa</label>
+					<select class="form-control" name="product" ng-model="curretStep.state" ng-options="state.id as state.name for state in flow.states" ng-required="true">
+						<option value="">Selecione um status</option>
+						<!--<option value={{product[0]}} ng-repeat="product in products">{{product[1]}} ({{product[2]}})</option>-->
+					</select> <i></i>
+				</div>
 				
 			</form>
 		</div>
@@ -55,15 +90,24 @@
 							<div class="">
 								<label>Adicionar usuário</label>
 								<div class="input-group">
-									<input type="text" class="form-control">
+									<ui-select ng-model="curretStep.newUser" theme="bootstrap" >
+										<ui-select-match placeholder="Selecione um usuário">{{$select.selected.name}}</ui-select-match>
+										<ui-select-choices repeat="person in people | propsFilter: {name: $select.search, age: $select.search}">
+											<div ng-bind-html="person.name | highlight: $select.search"></div>
+											<small>email: {{person.email}} age:
+												<span ng-bind-html="''+person.age | highlight: $select.search"></span>
+											</small>
+										</ui-select-choices>
+									</ui-select>
 									<span class="input-group-btn">
-										<button type="button" class="btn btn-primary">Adicionar</button>
+										<button ng-disabled="!curretStep.newUser" type="button" class="btn btn-primary" ng-click="addUser()">Adicionar</button>
 									</span>
 								</div>
 							</div>
 						</div>
 						
-
+						
+						
 						
 					</fieldset>
 				</form>
@@ -75,7 +119,7 @@
 					<li ng-repeat="user in curretStep.users">
 						<img ng-src="{{user.url}}" alt="Image" class="img-responsive img-circle">
 						<div class="user-name ng-binding">{{user.name}} <br>{{user.email}}</div>
-						<i class="fa fa-times pull-right" title="Remover usuário" ></i>
+						<i class="fa fa-times pull-right" title="Remover usuário" ng-click="removeUser($index)"></i>
 						<a class="pull-right" href="#" editable-select="user.permission" e-ng-options="s.value as s.text for s in permissions">{{permissionsLabel[user.permission]}}</a>
 						
 					</li>
@@ -89,7 +133,7 @@
 </div>
 </div>
 <div>
-	
-	<button type="button" ng-click="openSecond()" class="btn btn-primary">Salvar</button>
+	<a type="button" ng-disabled="!curretStep.title || !curretStep.users || !curretStep.state" class="btn btn btn-primary" ng-click="saveStep()"><i class="fa fa-check"></i><span class="hidden-xs">Salvar</span></a>
+	<a type="button" class="btn btn btn-danger" ng-click="removeStep(curretStep)"><i class="fa fa-trash-o"></i><span class="hidden-xs">Excluir</span></a>
 </div>
 </script>								

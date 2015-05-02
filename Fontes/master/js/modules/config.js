@@ -36,7 +36,9 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
 	 .state('app.process-add', {
         url: '/process-add',
         title: 'Process Add',
-        templateUrl: helper.basepath('process-add.html')
+        templateUrl: helper.basepath('process-add.html'),
+		controller: "process-add",
+		resolve: helper.resolveFor('ngDialog')
     })	
 	 .state('app.process-detail', {
         url: '/process-detail/:id',
@@ -64,7 +66,7 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
         url: '/workflow-add/:id',
         title: 'Fluxo de Trabalho',
         templateUrl: helper.basepath('workflow-add.html'),
-		resolve: helper.resolveFor('htmlSortable','ngDialog','xeditable'),//'codemirror', 'moment', 'taginput','inputmask','localytics.directives', 'ui.bootstrap-slider', 'ngWig', 'filestyle'
+		resolve: helper.resolveFor('htmlSortable','ngDialog','xeditable','ui.select'),//'codemirror', 'moment', 'taginput','inputmask','localytics.directives', 'ui.bootstrap-slider', 'ngWig', 'filestyle'
 		controller: "workflow-add"
     })
 	 .state('app.users', {

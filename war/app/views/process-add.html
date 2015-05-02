@@ -1,26 +1,97 @@
 <h3>
-	
-	Adicionar Processo
-	<small>Criar um novo processo dentro do sistema</small>
-	
-</h3>
-<div class="panel panel-default ng-scope">
-   <div class="panel-heading">Informações sobre o processo</div>
-   <div class="panel-body">
-      <form method="get" action="/" class="form-horizontal ng-pristine ng-valid">
-	  <div class="form-group">
-               <label class="col-sm-2 control-label">Tipo de Fluxo</label>
-               <div class="col-sm-10">
-                  <select name="account" class="form-control">
-                     <option value="Option 1">Solicitação de Férias</option>
-                     <option value="Option 2">Enpenho de Nota</option>
-                     <option value="Option 3">Exoneração</option>
-                     <option value="Option 4">Nomeação</option>
-                  </select>
-                  
-               </div>
-            </div>
-	  </form>
+		<div class="pull-right">
+		<a type="button" class="btn btn btn-primary" ng-click="add()"><i class="fa fa-check"></i><span class="hidden-xs">Salvar</span></a>
 	</div>
+	Adicionar Processo<small>Criar um novo processo dentro do sistema</small></h3>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default ng-scope well">
+			<div class="panel-heading">Informações sobre o processo</div>
+			<div class="panel-body">
+				<form method="get" action="/" class="form-horizontal ng-pristine ng-valid">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Tipo de Fluxo</label>
+						<div class="col-sm-10">
+							<select name="account" class="form-control">
+								<option value="Option 1">Solicitação de Férias</option>
+								<option value="Option 2">Enpenho de Nota</option>
+								<option value="Option 3">Exoneração</option>
+								<option value="Option 4">Nomeação</option>
+							</select>
+							
+						</div>
+					</div>					
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Assunto</label>
+						<div class="col-sm-10">
+							<textarea class="form-control ng-pristine ng-valid ng-touched ng-scope" rows="5" id="comment" ng-model="process.subject"></textarea>
+							
+						</div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default ng-scope">
+			<div class="panel-heading"><div class="divider"><i class="fa fa-folder-open"></i> Arquivos:</div></div>
+			<div class="panel-body">
+				
+				
+				
+				<a type="button" class="btn btn btn-primary" ng-dialog="upload" ng-dialog-class="ngdialog-theme-default"  ng-dialog-controller="file-add"><i class="fa fa-plus"></i><span class="hidden-xs">Arquivo</span></a>
+				
+				<div class="process-detail-files">					
+					<ul class="list-unstyled">
+						<li><a><i class="fa fa-file-pdf-o "></i> Cópia do edital.pdf</a></li>
+						<li><a><i class="fa fa-file-photo-o "></i> Carteira de habilitação.jpg</a></li>
+						<li><a><i class="fa fa-file-pdf-o "></i> Cópia do Documento.pdf</a></li>
+					</ul>		
+				</div>
+			</div>
+		</div>
 	</div>
-         
+	<div class="col-md-4">
+		<div class="panel panel-default ng-scope">
+			<div class="panel-heading">Informações sobre o processo</div>
+			<div class="panel-body">
+				
+				<div class="process-detail-users">
+					<div class="divider"><i class="fa fa-group"></i> Usuários:</div>
+					<ul class="list-unstyled">
+						<li>
+							<img src="https://lh3.googleusercontent.com/-RBKy0gJ8gNs/AAAAAAAAAAI/AAAAAAAAAuw/tAtBvwZWxfE/s120-c/photo.jpg" alt="Image" class="img-responsive img-circle">
+							<div class="user-name ng-binding">Daniel Piola</div>
+							</li><li>
+							<img src="https://lh3.googleusercontent.com/-9rtQFmpIujE/AAAAAAAAAAI/AAAAAAAAACI/BYPVXdBlnf8/s120-c/photo.jpg" alt="Image" class="img-responsive img-circle">
+							<div class="user-name ng-binding">Fernando Santos</div>
+							</li><li>
+							<img src="https://lh3.googleusercontent.com/-RBKy0gJ8gNs/AAAAAAAAAAI/AAAAAAAAAuw/tAtBvwZWxfE/s120-c/photo.jpg" alt="Image" class="img-responsive img-circle">
+							<div class="user-name ng-binding">Daniel Piola</div>
+						</li>
+						
+						
+					</ul>	
+				</div>
+				
+				
+				
+				<div class="process-detail-files">
+					<div class="divider"><i class="fa fa-tasks"></i> Fases do processo:</div>
+					<ul class="list-unstyled">
+						<li><span class="circle circle-success circle-lg text-left"></span> Setor de RH</li>
+						<li><span class="circle circle-primary circle-lg text-left"></span> Setor de Contratos</li>
+						<li><span class="circle circle-default circle-lg text-left"></span> Setor Finenceiro</li>
+					</ul>		
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/ng-template" id="upload">
+	<div data-ng-include="'app/views/includes/file-add.html'"></div>
+</script>
