@@ -2,8 +2,8 @@ package com.mex.drive.auth;
 
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
@@ -32,9 +32,7 @@ public final class GoogleAuthHelper {
    * Callback URI that google will redirect to after successful authentication
    */
   // start google authentication constants
-  private static final Collection<String>   SCOPE          = Arrays
-      .asList("https://www.googleapis.com/auth/userinfo.profile;https://www.googleapis.com/auth/userinfo.email"
-          .split(";"));
+  private Collection<String>                scope;
   private static final String               USER_INFO_URL  = "https://www.googleapis.com/oauth2/v1/userinfo";
   private static final JsonFactory          JSON_FACTORY   = new JacksonFactory();
   private static final HttpTransport        HTTP_TRANSPORT = new NetHttpTransport();
@@ -49,7 +47,11 @@ public final class GoogleAuthHelper {
    * SECRET, and SCOPE
    */
   public GoogleAuthHelper() {
-    this.flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, Constants.WEB_CLIENT_ID, Constants.SECRET_KEY, SCOPE).build();
+    this.scope = new HashSet<String>();
+    this.scope.add(Constants.SCOPE_EMAIL);
+    this.scope.add(Constants.SCOPE_PROFILE);
+
+    this.flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, Constants.WEB_CLIENT_ID, Constants.SECRET_KEY, this.scope).build();
 
     this.generateStateToken();
   }

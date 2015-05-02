@@ -5,9 +5,21 @@ package com.mex.drive.view.endpoint;
  * helloworld API.
  */
 public class Constants {
-  public static final String WEB_CLIENT_ID = "592974826606-g3fo48v2eb78ql47dde6hfrlcr6vuo3f.apps.googleusercontent.com";
-  public static final String SECRET_KEY    = "2f2iuyNyMBESDkBU4inYoH3e";
+  // Web Applications
+  public static final String WEB_CLIENT_ID          = "";
+  public static final String SECRET_KEY             = "";
 
-  public static final String EMAIL_SCOPE   = "https://www.googleapis.com/auth/userinfo.email";
-  public static final String CALLBACK_URL  = "http://localhost:8888/googleoauth2callback";
+  // Service Account
+  public static final String SERVICE_ACCOUNT_ID     = "";
+  public static final String SERVICE_ACCOUNT_EMAIL  = "";
+  public static final String SERVICE_ACCOUNT_USER   = "";
+
+  /** Path to the Service Account's Private Key file */
+  public static final String SERVICE_ACCOUNT_PKCS12 = "MexGED-0f8c8f1f95ce.p12";
+
+  // Oauth Scopes
+  public static final String SCOPE_EMAIL            = "https://www.googleapis.com/auth/userinfo.profile";
+  public static final String SCOPE_PROFILE          = "https://www.googleapis.com/auth/userinfo.email";
+  public static final String CALLBACK_URL           = "http://localhost:8888/googleoauth2callback";
+
 }

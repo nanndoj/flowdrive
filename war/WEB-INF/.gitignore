@@ -1,2 +1,6 @@
 /classes/
+<<<<<<< HEAD
 /appengine-generated/
+=======
+/lib
+>>>>>>> branch 'master' of https://github.com/nanndoj/flowdrive.git

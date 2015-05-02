@@ -2,15 +2,14 @@ package com.mex.drive.view.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.mex.drive.auth.GoogleAuthHelper;
 import com.mex.drive.business.UserBO;
+import com.mex.drive.exceptions.MEXException;
 import com.mex.drive.model.entity.User;
 
 @SuppressWarnings("serial")
@@ -33,23 +32,26 @@ public class GoogleAuthCallbackServlet extends HttpServlet {
         User u = new User();
         u.setId(userInfo.getString("id"));
 
-        // Check if the user is already saved on the system
-        User foundUser = new UserBO().get(User.class, u.getKey());
+        UserBO userBO = new UserBO();
 
-        // If the user was found
-        if (foundUser == null) {
-          resp.sendRedirect("/app/404");
-        } else {
+        // Check if the user has permission to access this feature
+        // by consulting Google Admin Console
+        if (userBO.isAuthorized(u)) {
+          userBO.authorize(u);
+
+          // The user has the required permission to go on
           req.setAttribute("token", req.getParameter("code"));
-          req.setAttribute("user", foundUser);
+          req.setAttribute("user", u);
+
+          // Go ahead
           req.getRequestDispatcher("/postlogin.jsp").forward(req, resp);
+
+        } else {
+          resp.sendRedirect("/app/404");
         }
       }
-
-      resp.getWriter().print(userInfo.toString());
-    } catch (JSONException | ServletException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+    } catch (Exception e) {
+      new MEXException(e).handle(req, resp);
     }
 
   }
