@@ -15,7 +15,7 @@ public class Constants {
   public static final String SERVICE_ACCOUNT_USER   = "";
 
   /** Path to the Service Account's Private Key file */
-  public static final String SERVICE_ACCOUNT_PKCS12 = "MexGED-0f8c8f1f95ce.p12";
+  public static final String SERVICE_ACCOUNT_PKCS12 = "";
 
   // Oauth Scopes
   public static final String SCOPE_EMAIL            = "https://www.googleapis.com/auth/userinfo.profile";
