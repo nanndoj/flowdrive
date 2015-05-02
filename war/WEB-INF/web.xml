@@ -29,7 +29,7 @@
   <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
   <init-param>
    <param-name>services</param-name>
-   <param-value>com.mex.drive.view.endpoint.UserREST</param-value>
+   <param-value>com.mex.drive.view.endpoint.RequestREST,com.mex.drive.view.endpoint.UserREST</param-value>
   </init-param>
  </servlet>
  <servlet-mapping>
