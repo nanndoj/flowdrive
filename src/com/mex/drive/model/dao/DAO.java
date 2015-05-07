@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import com.google.appengine.api.datastore.Key;
 import com.mex.drive.business.ObjectHandler;
 import com.mex.drive.model.EMF;
 import com.mex.drive.model.entity.BasicEntity;
@@ -91,7 +90,7 @@ public abstract class DAO implements ObjectHandler<BasicEntity> {
   }
 
   @Override
-  public <K extends BasicEntity> K get(Class<K> clazz, Key id) {
+  public <K extends BasicEntity> K get(Class<K> clazz, Object id) {
     // Create an entity manager
     EntityManager em = EMF.get().createEntityManager();
     try {

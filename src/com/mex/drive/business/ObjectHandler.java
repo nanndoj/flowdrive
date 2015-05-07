@@ -2,7 +2,6 @@ package com.mex.drive.business;
 
 import java.util.List;
 
-import com.google.appengine.api.datastore.Key;
 import com.mex.drive.model.entity.BasicEntity;
 
 /**
@@ -46,5 +45,5 @@ public interface ObjectHandler<T> {
    *
    * @return
    */
-  <K extends BasicEntity> K get(Class<K> clazz, Key id);
+  <K extends BasicEntity> K get(Class<K> clazz, Object id);
 }

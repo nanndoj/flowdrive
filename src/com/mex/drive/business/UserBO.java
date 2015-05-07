@@ -16,7 +16,9 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.admin.directory.Directory;
 import com.google.api.services.admin.directory.Directory.Users.Get;
 import com.google.api.services.admin.directory.DirectoryScopes;
+import com.mex.drive.model.dao.DAO;
 import com.mex.drive.model.entity.User;
+import com.mex.drive.model.entity.UserToken;
 import com.mex.drive.view.endpoint.Constants;
 
 public class UserBO extends BusinessObject {
@@ -93,5 +95,21 @@ public class UserBO extends BusinessObject {
     if (foundUser == null) {
       this.insert(user);
     }
+  }
+
+  public UserToken saveRefreshToken(User user, String refreshToken) throws Exception {
+    UserToken token = new UserToken();
+    token.setUserId(user.getId());
+    token.setToken(refreshToken);
+
+    // Check if there's a associated token
+    DAO dao = DAO.getInstance(User.class);
+    UserToken foundToken = dao.get(UserToken.class, user.getId());
+    if (foundToken != null) {
+      // Remove the previous token
+      dao.delete(foundToken);
+    }
+    return (UserToken) dao.insert(token);
+
   }
 }

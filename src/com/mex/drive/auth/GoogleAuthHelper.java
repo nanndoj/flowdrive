@@ -63,7 +63,7 @@ public final class GoogleAuthHelper {
 
     final GoogleAuthorizationCodeRequestUrl url = this.flow.newAuthorizationUrl();
 
-    return url.setRedirectUri(Constants.CALLBACK_URL).setState(this.stateToken).build();
+    return url.setRedirectUri(Constants.CALLBACK_URL).setAccessType("offline").setApprovalPrompt("auto").setState(this.stateToken).build();
   }
 
   /**
@@ -93,9 +93,8 @@ public final class GoogleAuthHelper {
    *          authentication code provided by google
    * @throws JSONException
    */
-  public JSONObject getUserInfoJson(final String authCode) throws IOException, JSONException {
+  public JSONObject getUserInfoJson(GoogleTokenResponse response) throws IOException, JSONException {
 
-    final GoogleTokenResponse response = this.flow.newTokenRequest(authCode).setRedirectUri(Constants.CALLBACK_URL).execute();
     final Credential credential = this.flow.createAndStoreCredential(response, null);
     final HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(credential);
     // Make an authenticated request
@@ -106,6 +105,19 @@ public final class GoogleAuthHelper {
 
     return new JSONObject(jsonIdentity);
 
+  }
+
+  /**
+   * Expects an Authentication Code, and makes an authenticated request for the
+   * user's profile information
+   *
+   * @return JSON formatted user profile information
+   * @param authCode
+   *          authentication code provided by google
+   * @throws JSONException
+   */
+  public GoogleTokenResponse getUserToken(final String authCode) throws IOException, JSONException {
+    return this.flow.newTokenRequest(authCode).setRedirectUri(Constants.CALLBACK_URL).execute();
   }
 
 }

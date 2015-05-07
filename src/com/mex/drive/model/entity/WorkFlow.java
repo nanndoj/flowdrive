@@ -8,7 +8,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class WorkFlow extends BasicEntity {
+public class WorkFlow extends IdentifiedEntity {
   private String name;
 
   public String getName() {

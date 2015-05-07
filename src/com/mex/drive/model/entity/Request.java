@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Request extends BasicEntity {
+public class Request extends IdentifiedEntity {
   protected String        protocolNumber;
   protected String        title;
   protected String        description;

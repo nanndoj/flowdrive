@@ -6,7 +6,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class State extends BasicEntity {
+public class State extends IdentifiedEntity {
   private String stateName;
 
   public String getStateName() {

@@ -9,7 +9,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class User extends BasicEntity {
+public class User extends IdentifiedEntity {
   private String name;
   private String email;
   private String profileImageURL;

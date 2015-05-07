@@ -20,6 +20,16 @@
 		<url-pattern>/googleoauth2callback</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Controller -->
+	<filter>
+		<filter-name>Controller</filter-name>
+		<filter-class>com.mex.drive.filter.ControllerFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Controller</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<!-- Welcome Files -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

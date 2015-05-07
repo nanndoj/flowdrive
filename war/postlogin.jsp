@@ -6,7 +6,9 @@
 				// Define user data to be stored
 				var userData = {
 					id: '${requestScope.user.id}',
-					token: '${requestScope.token}',
+					_t: '${requestScope.token}',
+					_ex: '${requestScope.expires}',
+					_dt: new Date(),
 					name: '${requestScope.user.name}',
 					email: '${requestScope.user.email}',
 					profileURL: '${requestScope.user.profileImageURL}',

@@ -2,7 +2,6 @@ package com.mex.drive.business;
 
 import java.util.List;
 
-import com.google.appengine.api.datastore.Key;
 import com.mex.drive.model.dao.DAO;
 import com.mex.drive.model.entity.BasicEntity;
 
@@ -26,7 +25,7 @@ public abstract class BusinessObject implements ObjectHandler<BasicEntity> {
   }
 
   @Override
-  public <K extends BasicEntity> K get(Class<K> clazz, Key id) {
+  public <K extends BasicEntity> K get(Class<K> clazz, Object id) {
     DAO dao = DAO.getInstance(clazz);
     return dao.get(clazz, id);
   }

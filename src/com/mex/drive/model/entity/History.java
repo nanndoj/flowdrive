@@ -8,7 +8,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class History extends BasicEntity {
+public class History extends IdentifiedEntity {
   private Date   date;
   private String text;
 

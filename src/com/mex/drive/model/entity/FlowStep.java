@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class FlowStep extends BasicEntity {
+public class FlowStep extends IdentifiedEntity {
   private String   name;
   @OneToMany(cascade = CascadeType.PERSIST)
   private WorkFlow flow;

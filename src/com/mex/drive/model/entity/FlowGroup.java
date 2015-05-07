@@ -6,7 +6,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class FlowGroup extends BasicEntity {
+public class FlowGroup extends IdentifiedEntity {
   private String description;
   private String color;
 
